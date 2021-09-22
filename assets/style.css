@@ -10,25 +10,29 @@ body, html {
 }
 
 .header {
-    background-color: #121943;
-    height: 200px;
+    background-color: #222222;
+    height: 188px;
     padding: 16px 0 0 0;
+}
+
+.header-emoji {
+    font-size: 60px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .header-title {
     color: #FFFFFF;
     font-size: 48px;
     font-weight: bold;
-    text-align: left;
-    margin: 0px, 200px, 150px, 200px;
-    padding-left: 100px;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .header-description {
     color: #CFCFCF;
-    text-align: left;
-    margin: 0px, 200px, 150px, 200px;
-    padding-left: 100px;
+    margin: 4px auto;
+    text-align: center;
     max-width: 384px;
 }
 
@@ -40,13 +44,13 @@ body, html {
    height: 120vh;
    max-height: 1400px;
    background-color: #121943;
-   margin: 20px 80px;
+   margin: 20px 40px;
 }
 
 .competition-graph-container {
    display: flex;
    flex-direction: column;
-   flex: 2;
+   flex: 1.8;
    min-width: 0;
    min-height: 0;
    background-color: #0A165A;
@@ -101,10 +105,6 @@ body, html {
    align-items: center;
 }
 
-.datepicker {
-
-}
-
 .competition-title {
    color: white;
    font-size: 2.3em;
@@ -112,11 +112,36 @@ body, html {
    text-align: center;
 }
 
+.category-title-container, .time-title-container {
+   display: flex;
+   padding: 5px 20px;
+   justify-content: space-evenly;
+   align-items: center;
+}
+
 .categorical-graph-title, .time-graph-title {
    color: white;
    font-size: 1.5em;
-   padding: 20px;
+   text-align: left;
+}
+
+.DateRangePickerInput {
    text-align: center;
 }
 
+.DateInput, .DateInput_1 {
+    Width: 100px;
+}
 
+.DateInput_input, .DateInput_input_1 {
+  Height: 40px;
+  font-size: 0.8em; 
+  padding: 0;
+  text-align: center;
+}
+
+.DateRangePickerInput_arrow_svg, .DateRangePickerInput_arrow_svg_1 {
+  Height: 10px !important;
+  Width: 10px !important;
+  margin-bottom: 5px;
+}
