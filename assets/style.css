@@ -1,11 +1,16 @@
-body {
+body, html {
     font-family: "Lato", sans-serif;
     margin: 0;
-    background-color: #020261;
+    height: 100%;
+    background-color: #121943;
+}
+
+.app__container {
+    margin: 3% 5%;
 }
 
 .header {
-    background-color: #020261;
+    background-color: #121943;
     height: 200px;
     padding: 16px 0 0 0;
 }
@@ -28,58 +33,90 @@ body {
 }
 
 .graph-container {
-    display: flex;
-    margin-right: auto;
-    margin-left: auto;
-    padding-right: 10px;
-    padding-left: 10px;
-    margin-top: 32px;
-    margin-bottom: 48px;
+   display: flex;
+   justify-content: space-evenly;
+   min-width: 0;
+   min-height: 0;
+   height: 120vh;
+   max-height: 1400px;
+   background-color: #121943;
+   margin: 20px 80px;
 }
 
 .competition-graph-container {
-   flex: 2;
-   padding: 10px;
-}
-
-.category-graph-container {
-   flex: 1;
    display: flex;
    flex-direction: column;
-   padding: 10px;
+   flex: 2;
+   min-width: 0;
+   min-height: 0;
+   background-color: #0A165A;
+   margin-right: 20px;
 }
 
-.category-graph:first-child {
+.competition-graph {
+   min-width: 0;
+   min-height: 0;
+   flex: 1 1 auto;
+}
+
+.training-graph-container {
+   display: flex;
+   flex-direction: column;
    flex: 1;
-   margin-bottom: 10px;
+   min-width: 0;
+   min-height: 0;
+   background-color: #121943;
+}
+
+.time-series-graph-container, .bar-categorical-graph-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   flex: 1;
+   min-width: 0;
+   min-height: 0;
+   background-color: #0A165A;
+}
+
+.bar-categorical-graph-container{
+   margin-bottom: 20px;
+}
+
+.time-series-graph, .bar-categorical-graph {
+   min-width: 0;
+   min-height: 0;
+   flex: 1 1 auto;
 }
 
 .menu {
-    height: 112px;
-    width: 912px;
-    display: flex;
-    justify-content: space-evenly;
-    padding-top: 24px;
-    margin: -80px auto 0 auto;
-    background-color: #FFFFFF;
-    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.18);
+   margin: 0;
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
 }
 
-.Select-control {
-    width: 256px;
-    height: 48px;
+.train-menu {
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
 }
 
-.Select--single > .Select-control .Select-value, .Select-placeholder {
-    line-height: 48px;
+.datepicker {
+
 }
 
-.Select--multi .Select-value-label {
-    line-height: 32px;
+.competition-title {
+   color: white;
+   font-size: 2.3em;
+   padding: 30px;
+   text-align: center;
 }
 
-.menu-title {
-    margin-bottom: 6px;
-    font-weight: bold;
-    color: #079A82;
+.categorical-graph-title, .time-graph-title {
+   color: white;
+   font-size: 1.5em;
+   padding: 20px;
+   text-align: center;
 }
+
+
