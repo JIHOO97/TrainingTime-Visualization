@@ -1,85 +1,167 @@
-body {
+body, html {
     font-family: "Lato", sans-serif;
     margin: 0;
-    background-color: #020261;
+    height: 100%;
+    background-color: #121943;
+}
+
+.app__container {
+    margin: 3% 5%;
 }
 
 .header {
-    background-color: #020261;
-    height: 200px;
+    background-color: #222222;
+    height: 188px;
     padding: 16px 0 0 0;
+}
+
+.header-emoji {
+    font-size: 60px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .header-title {
     color: #FFFFFF;
     font-size: 48px;
     font-weight: bold;
-    text-align: left;
-    margin: 0px, 200px, 150px, 200px;
-    padding-left: 100px;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .header-description {
     color: #CFCFCF;
-    text-align: left;
-    margin: 0px, 200px, 150px, 200px;
-    padding-left: 100px;
+    margin: 4px auto;
+    text-align: center;
     max-width: 384px;
 }
 
 .graph-container {
-    display: flex;
-    margin-right: auto;
-    margin-left: auto;
-    padding-right: 10px;
-    padding-left: 10px;
-    margin-top: 32px;
+   display: flex;
+   justify-content: space-evenly;
+   min-width: 0;
+   min-height: 0;
+   height: 120vh;
+   max-height: 1400px;
+   background-color: #121943;
+   margin: 20px 40px;
 }
 
 .competition-graph-container {
-   flex: 2;
-   padding: 10px;
-}
-
-.category-graph-container {
-   flex: 1;
    display: flex;
    flex-direction: column;
-   height: 900px;
-   width: 1000px;
+   flex: 1.8;
+   min-width: 0;
+   min-height: 0;
+   background-color: #0A165A;
+   margin-right: 20px;
 }
 
-.category-graph {
-   flex: 1;
-   margin: 10px;
+.competition-graph {
+   min-width: 0;
+   min-height: 0;
+   flex: 1 1 auto;
 }
+
+.training-graph-container {
+   display: flex;
+   flex-direction: column;
+   flex: 1;
+   min-width: 0;
+   min-height: 0;
+   background-color: #121943;
+}
+
+.time-series-graph-container, .bar-categorical-graph-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   flex: 1;
+   min-width: 0;
+   min-height: 0;
+   background-color: #0A165A;
+}
+
+.bar-categorical-graph-container{
+   margin-bottom: 20px;
+}
+
+.time-series-graph, .bar-categorical-graph {
+   min-width: 0;
+   min-height: 0;
+   flex: 1 1 auto;
+}
+
+.time-series-button {
+    color: #fff !important;
+	text-transform: uppercase;
+	text-decoration: none;
+	background: #60a3bc;
+	padding: 7px;
+	display: inline-block;
+    transition: all 0.3s ease 0s;
+    margin: 15px;
+}
+
+.time-series-button:hover {
+    color: #494949 !important;
+    border-radius: 50px;
+    border-color: #494949 !important;
+    transition: all 0.3s ease 0s;
+}
+
+
 
 .menu {
-    height: 112px;
-    width: 912px;
-    display: flex;
-    justify-content: space-evenly;
-    padding-top: 24px;
-    margin: -80px auto 0 auto;
-    background-color: #FFFFFF;
-    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.18);
+   margin: 0;
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
 }
 
-.Select-control {
-    width: 256px;
-    height: 48px;
+.train-menu {
+   display: flex;
+   justify-content: space-evenly;
+   align-items: center;
 }
 
-.Select--single > .Select-control .Select-value, .Select-placeholder {
-    line-height: 48px;
+.competition-title {
+   color: white;
+   font-size: 2.3em;
+   padding: 30px;
+   text-align: center;
 }
 
-.Select--multi .Select-value-label {
-    line-height: 32px;
+.category-title-container, .time-title-container {
+   display: flex;
+   padding: 5px 20px;
+   justify-content: space-evenly;
+   align-items: center;
 }
 
-.menu-title {
-    margin-bottom: 6px;
-    font-weight: bold;
-    color: #079A82;
+.categorical-graph-title, .time-graph-title {
+   color: white;
+   font-size: 1.5em;
+   text-align: left;
+}
+
+.DateRangePickerInput {
+   text-align: center;
+}
+
+.DateInput, .DateInput_1 {
+    Width: 100px;
+}
+
+.DateInput_input, .DateInput_input_1 {
+  Height: 40px;
+  font-size: 0.8em; 
+  padding: 0;
+  text-align: center;
+}
+
+.DateRangePickerInput_arrow_svg, .DateRangePickerInput_arrow_svg_1 {
+  Height: 10px !important;
+  Width: 10px !important;
+  margin-bottom: 5px;
 }
