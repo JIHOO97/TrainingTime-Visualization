@@ -93,14 +93,14 @@ body, html {
 }
 
 .time-series-button {
-    color: #fff !important;
+   color: #fff !important;
 	text-transform: uppercase;
 	text-decoration: none;
 	background: #60a3bc;
 	padding: 7px;
 	display: inline-block;
-    transition: all 0.3s ease 0s;
-    margin: 15px;
+   transition: all 0.3s ease 0s;
+   margin: 7px;
 }
 
 .time-series-button:hover {
