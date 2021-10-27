@@ -52,26 +52,33 @@ competition_data = pd.read_csv("Swim_progress.csv") # read csv file
 # fill NaN with zeros
 competition_data = competition_data.fillna(0)
 
+# drop all zero rows
+competition_data = competition_data.loc[(competition_data!=0).any(axis=1)]
+competition_data = competition_data.reset_index(drop=True)
+
+# change date format
+for i in range(len(competition_data)):
+    competition_data.at[i, 'Date'] = datetime.strptime(competition_data.Date[i], '%d/%m/%Y').date()
+
 # convert Date column as an index
 competition_data['Date'] = pd.to_datetime(competition_data['Date'])
 competition_data.set_index('Date', inplace=True)
 
-# sort dataframe by datetime
-competition_data = competition_data.sort_index()
-
-# drop competition name **나중에 필요하면 이거 지우시면 됩니다 (대신 밑에 코드 수정 필요)**
-competition_data = competition_data.drop(axis=0, columns="Competition Name")
-
-# columns names
-competition_col_list = competition_data.columns
-
+# convert str to time
+cols = competition_data.columns[:-1]
+isNotEric = False
 for i in range(len(competition_data)):
-    for col_name in competition_col_list:
-        converted_value = convertToSec(competition_data.iloc[i, competition_data.columns.get_loc(col_name)])
-        competition_data.iloc[i, competition_data.columns.get_loc(col_name)] = converted_value
+    if isNotEric:
+        break
+    for col in cols:
+        if competition_data["Name"][i] != "오승현":
+            isNotEric = True
+            break
+        if competition_data.iloc[i][col] != 0:
+            competition_data.iloc[i, competition_data.columns.get_loc(col)] = convertToSec(competition_data.iloc[i][col])
 
 competition_option_list = []
-for column in competition_data.columns:
+for column in competition_data.columns[:-1]:
     tmp_dict = {}
     tmp_dict["label"] = column
     tmp_dict["value"] = column
@@ -131,9 +138,19 @@ app.layout = html.Div(
                                 dcc.Dropdown(
                                     id='competition-name-selector',
                                     options=[
-                                        {'label': 'Eric Oh', 'value': 'eric'},
+                                        {'label': '오승현', 'value': '오승현'},
+                                        {'label': '이호은', 'value': '이호은'},
+                                        {'label': '변현준', 'value': '변현준'},
+                                        {'label': '고준호', 'value': '고준호'},
+                                        {'label': '우성홍', 'value': '우성홍'},
+                                        {'label': '곽송현', 'value': '곽송현'},
+                                        {'label': '정민서', 'value': '정민서'},
+                                        {'label': '고관혁', 'value': '고관혁'},
+                                        {'label': '김은호', 'value': '김은호'},
+                                        {'label': '곽민지', 'value': '곽민지'},
+                                        {'label': '안현정', 'value': '안현정'},
                                     ],
-                                    value='eric',
+                                    value='오승현',
                                     style={"min-width": "150px"},
                                 ),
                                 
@@ -350,19 +367,20 @@ app.layout = html.Div(
 )
 
 
-# Monthly data
-monthly_competition_data = competition_data.copy()
-monthly_competition_data = monthly_competition_data.astype('float16') # should match the datatype
-monthly_competition_data = monthly_competition_data.resample('1M').mean()
-monthly_competition_data = monthly_competition_data.fillna(0)
+# # Monthly data
+# monthly_competition_data = competition_data.copy()
+# monthly_competition_data = monthly_competition_data.astype('float16') # should match the datatype
+# monthly_competition_data = monthly_competition_data.resample('1M').mean()
+# monthly_competition_data = monthly_competition_data.fillna(0)
 
-# drop rows with all zeros
-compeition_column_list = monthly_competition_data.columns
-monthly_competition_data = monthly_competition_data[(monthly_competition_data[compeition_column_list].T != 0.0).any()]
+# # drop rows with all zeros
+# compeition_column_list = monthly_competition_data.columns
+# monthly_competition_data = monthly_competition_data[(monthly_competition_data[compeition_column_list].T != 0.0).any()]
 
 
-def convertAverageMonthly(event_name):
-    tmp_competition_data = competition_data[event_name].to_frame()
+def convertAverageMonthly(name, event_name):
+    tmp_competition_data = competition_data.loc[competition_data['Name'] == name]
+    tmp_competition_data = tmp_competition_data[event_name].to_frame()
     tmp_competition_data = tmp_competition_data[(tmp_competition_data.T != 0.0).any()]
     tmp_competition_data = tmp_competition_data.astype('float16').resample('1M').mean().fillna(0)
     return tmp_competition_data
@@ -385,14 +403,18 @@ def update_competition_chart(name, event_name, avg_or_date):
     # data according to avg_or_date selection
     competition_callback_data = None
     if avg_or_date == 'monthly-avg':
-        competition_callback_data = convertAverageMonthly(event_name)
+        competition_callback_data = convertAverageMonthly(name, event_name)
     else:
-        competition_callback_data = competition_data[event_name].to_frame()
+        competition_callback_data = competition_data.loc[competition_data['Name'] == name]
+        competition_callback_data = competition_callback_data[event_name].to_frame()
         competition_callback_data = competition_callback_data[(competition_callback_data.T != 0.0).any()]
-        
-    fig = px.line(
-        x=competition_callback_data.index, y=competition_callback_data[event_name]
-    )
+    
+    if len(competition_callback_data) == 0:
+        fig = px.line()
+    else:
+        fig = px.line(
+            x=competition_callback_data.index, y=competition_callback_data[event_name]
+        )
     
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False)
@@ -403,7 +425,7 @@ def update_competition_chart(name, event_name, avg_or_date):
             'plot_bgcolor': graph_bgcolor,
             'paper_bgcolor': graph_bgcolor,
             'xaxis_title': "Competition Date",
-            'yaxis_title': "Time",
+            'yaxis_title': "meter",
             'font': dict(
                 family="Lato, sans-serif",
                 size=18,
