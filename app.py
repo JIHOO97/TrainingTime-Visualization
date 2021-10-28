@@ -408,6 +408,7 @@ def update_competition_chart(name, event_name, avg_or_date):
         competition_callback_data = competition_data.loc[competition_data['Name'] == name]
         competition_callback_data = competition_callback_data[event_name].to_frame()
         competition_callback_data = competition_callback_data[(competition_callback_data.T != 0.0).any()]
+        competition_callback_data = competition_callback_data.astype('float16')
     
     if len(competition_callback_data) == 0:
         fig = px.line()
